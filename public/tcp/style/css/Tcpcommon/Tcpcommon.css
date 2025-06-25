@@ -1,0 +1,179 @@
+/* common header image with color section CSS code start - 1535229 */
+.template-head-section{
+	height: auto;
+    width: 100%;
+    padding-bottom: 5rem;
+    position: relative;
+    /* background: linear-gradient(90deg, hsla(231, 56%, 19%, 1) 0%, hsla(0, 9%, 100%, 1) 120%); */
+ 	display: flex;
+ 	align-items: center;  
+ 	background-size: cover !important;
+    background-position: center !important;   
+}
+.template-title{
+	font-size: 28px;
+	font-weight: bold;
+	color: #fff;
+	padding-top: 3rem;
+}
+.template-desc{
+	font-size: 18px;
+	color: #fff;
+	width: 100%;
+	margin-bottom: 0;
+}
+/* common header image with color section CSS code end - 1535229 */
+.load-more{
+	background: #0a265e;
+	border: 2px solid #0a265e;
+	color: #fff;
+	padding: 1rem 2rem;
+	font-weight: 600;
+}
+.load-more:hover{
+	background: transparent;
+	border: 2px solid #0a265e;
+	color: #0a265e;
+	text-decoration: none;
+}
+.commontootip {
+	padding-left: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.commontootip .commontootipText {
+  visibility: hidden;
+  width: 20rem;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 0.5rem;
+  position: absolute;
+  text-align: left;
+  border: 1px solid #000;
+  z-index: 1;
+  bottom: -50px;
+  font-size: 12px;
+  transition: opacity 1s;
+}
+
+.commontootip:hover .commontootipText {
+  visibility: visible;
+}
+
+/* social icon css */
+.socialList{
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding-inline-start: 0;
+	font-weitght: bolder;
+	font-size: 3rem;
+}
+
+.socialList li{
+	text-align: center;
+}
+.socialList li a img{
+	width: 50%;
+	padding: 0.1rem;
+	border: 1px solid #fff;
+}
+.socialList li a img:hover{
+    border: 1px solid #000;
+    border-radius: 30%;
+    padding: 0.1rem;
+}
+
+.copy-link-custom{
+	width: 90%;
+	cursor: not-allowed;
+	background: #ddd;
+}
+.custom-copy-btn{
+	width: 1rem;
+}
+.custom-copy-icon .fa-link{
+	padding: 0.5rem 0.5rem;
+    border-radius: 1rem;
+    color: #000;
+    background: #ddd;
+    margin-left: 1rem;
+}
+
+
+/* HSN Finder CSSS code */
+.hsn-section-common {
+	background-image: linear-gradient(to right, #ffb629, #ffbd32, #ffc43a, #ffca43, #ffd14b,
+		#ffd357, #ffd661, #ffd86c, #ffd77b, #ffd68a, #ffd698, #ffd7a6);
+		padding: 1rem;
+		border-radius: 1rem;
+		margin-bottom: 1rem;
+}
+.hsn-sub-main-section {
+	padding: 0 2rem;
+}
+.hsn-sub-main-section .hsn-section-title{
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+.hsn-finder-click{
+	background: #0a265e;
+    color: #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+.hsn-finder-click:hover{
+	color: #0a265e;
+	background: #fff;
+	text-decoration: none;
+}
+.hsn-dhl-img{
+	display: flex;
+	padding: 0 2rem;
+}
+
+
+.hsn-section-header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+	.hsn-section-header {
+    display: grid;
+    gap: 1rem;
+}
+	
+.hsn-sub-main-section {
+    padding: 0 1rem;
+}
+
+.hsn-finder-click {
+    text-align: center;
+}
+
+
+.hsn-dhl-img {
+    display: grid;
+    padding: 0;
+    gap: 1rem;
+    margin: auto;
+}
+}
+/* HSN Finder CSSS code */
+
+@media screen and (max-width: 600px) {
+	
+.commontootip .commontootipText {
+  width: 14rem;
+  bottom: -77px;
+}
+	
+}

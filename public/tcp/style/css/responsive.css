@@ -1,0 +1,160 @@
+  @media only screen and (min-width: 576px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    	max-width: 702px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    	max-width: 894px;
+  }
+   #tradeeventSlider .MS-content .services-outer{
+		width: 50%;
+	}
+}
+@media only screen and (min-width: 992px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    	max-width: 1008px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    	max-width: 1150px;
+  }
+   #tradeeventSlider .MS-content .services-outer{
+    width: 50%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    	max-width: 1326px;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    	max-width: 1526px;
+  }
+}
+ 
+/* mobile screen and down */
+@media (max-width: 600px) {
+	.main-slider-bg{
+		height: 100%;
+	}
+	#homeSlider .carousel-item img{
+		object-fit: contain;
+		height: 15rem !important;
+	}
+	.upcomingtrade-div{
+		margin-top: 1rem;	
+	}
+ .container{
+ 		min-width:300px;
+	}
+	
+	.main-menu-section .main-menu{
+		height: 100%;
+  		width: 0;
+  		position: fixed;
+    	top: 0;
+    	right: 0;
+    	font-size: 0.875rem;
+    	background: #0a265e;
+    	z-index: 9;
+    	width: 0%;
+    	transition: 0.5s;
+	}
+	.main-menu-section .main-menu li{
+	transition: 0.3s;
+	}
+	.mainmneu-toggle-btn{
+	font-size: 16px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    padding: 10px;
+    border: none;
+    display: block !important;
+	}
+	.closebtnli{
+	display: block !important;
+	}
+	.explore-market-section{
+	padding: 3rem;
+	}
+	.service-count-section{
+		flex-direction: column;
+	}
+	.service-count-section li{
+	border-right: none;
+	}
+	#tradeeventSlider .MS-content .services-outer{
+		width: 100%;
+	}
+	.trade-connect-main-section:before{
+		bottom: 85% !important;
+	}
+	#miniSlider .MS-content .services-outer1{
+		width: 50%;
+	}
+    .footer-logo-div{
+    	text-align: center;
+    }
+    .footer-header-title{
+    	display: none;
+    }
+}
+/* mobile screen and down */  
+@media (min-width : 768px) {
+	.menu-navbar .navbar-expand-md .navbar-nav .nav-link {
+		padding-right: .55rem;
+		padding-left: .55rem;
+	}
+	/* .main-section {
+		padding: 0 2rem;
+	} */
+	#homeSlider .carousel-caption {
+		padding-left: 3.125rem;
+		padding-right: 3.125rem;
+	}
+
+}
+
+@media ( max-width : 991px) {
+	#services .MS-content .services-outer {
+		width: 50%;
+	}
+}
+
+@media ( max-width : 767px) {
+	.main-wrap {
+		overflow-x: hidden;
+	}
+	#services .MS-content .services-outer {
+		width: 100%;
+	}
+	.how-to-apply .absolute-content-desc {
+		font-size: 16px;
+	}
+	.vrline {
+		border-right: unset;
+		padding-right: 0rem;
+	}
+}
+
+@media ( max-width : 992px) {
+	.navbar-toggler {
+		display: block;
+	}
+}
+
+@media ( max-width : 767px) {
+	.office-website {
+		width: 100%;
+	}
+}
+@media screen and (max-width:768px) {
+    .news-tabs.nav-tabs{
+	display: block;
+	}
+}
+	

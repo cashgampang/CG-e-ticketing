@@ -1,0 +1,63 @@
+.flex-div-around{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.br-2{
+	border-radius: 2rem;
+}
+.itchs-details-tabs{
+	justify-content: space-between;
+	border-top: 5px solid #53dfd1;
+	border-bottom: none;
+}
+.itchs-details-tabs .nav-item .nav-link{
+	padding: 1rem 3.5rem;
+	border-radius: 0;
+	background: #d7dbac;
+	border: 1px solid transparent;
+}
+
+.itchs-details-tabs .nav-item .nav-link:hover{
+	border: 1px solid transparent;
+	background: #53dfd1;
+}
+
+.itchs-details-tabs .nav-item .nav-link.active{
+	border-bottom: none;
+	background: #53dfd1;
+	border-top: none;
+	color: #000;
+	font-weight: normal;
+}
+
+.itchs-details-tabs .nav-item .nav-link.active:focus{
+	outline: 0;
+}
+.custom-itchs-section .card-header{
+	background: #61c2a2;
+}
+
+.custom-itchs-section .card-header h5 button{
+	
+}
+
+.itchs-custom-btn-div{
+	text-align: center;	
+}
+
+.itchs-custom-btn-div a{
+	background: #03045E;
+	padding: 1rem;
+	color: #fff;
+	border-radius: 2rem;
+	font-weight: 600;
+	border: 2px solid #03045E;
+}
+
+.itchs-custom-btn-div a:hover{
+	color: #03045E;
+	background: #fff;
+	border: 2px solid #03045E;
+	text-decoration: none;
+}

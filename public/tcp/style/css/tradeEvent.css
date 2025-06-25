@@ -1,0 +1,501 @@
+/* dashboard table css code start */
+#queriesTable tr th{
+	font-size: 12px;
+}
+#queriesTable tr td{
+	font-size: 12px;
+}
+#queriesTable .dropdown-menu.show{
+	left: -10rem;
+}
+/* trade data list css code start */
+.main-trade-list-url{
+	color: #000;
+}
+.main-trade-div{
+	justify-content: center;
+	align-items: center;
+	background: #fff;
+	margin: 2rem 0rem;	
+}
+.main-trade-list-url:hover{
+	color: #000 !important;
+	text-decoration: none !important;
+} 
+.calender-div{
+	position: relative;
+    display: flex;
+    justify-content: center;
+    /* width: 70%; */
+}
+.calender-img{
+	display: block;
+    width: 100%;
+    height: auto;
+}
+.calender-date{
+	position: absolute;
+    bottom: 30%;
+    width: 15%;
+    font-weight: 600;
+    transition: .5s ease;
+    opacity: 1;
+    font-size: 26px;
+    margin-bottom: 0px;
+}
+.calender-month{
+	position: absolute;
+    bottom: 10%;
+  /*   width: 32%; */
+    transition: .5s ease;
+    opacity: 1;
+    font-size: 20px;
+    margin-bottom: 0px;
+    color: #000000;
+}
+.trade-list-data{
+	display: flex;
+	align-items: center;
+	width: 65%;
+	padding: 1.5rem;
+	color: #000000;
+}
+.trade-event-img{
+	width: 100%;
+}
+.trade-event-img img {
+	width: 100%;
+	height: 100%;
+}
+/* trade data list css code end */
+
+
+/* trade event css code start */
+#search-css-event-country .chosen-container-single .chosen-single div{
+	display: none;
+} 
+#search-css-event-country .chosen-container{
+	width: 15rem !important;
+}
+#search-css-event-country .chosen-container-single .chosen-single{
+	background: #185268;
+	color: #ffffff;
+	text-align: center;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 45px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 15px;
+    padding: 0px 30px;
+    font-size: 20px;
+}
+#search-css-event-country .chosen-container-active.chosen-with-drop .chosen-single{
+	background: #185268;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 40px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 20px 20px 0px 0px;
+}
+#search-css-event-country .chosen-container .chosen-results{
+	color: #000;
+}
+#search-css-event-country .chosen-container-single .chosen-single span{
+	font-size: 20px;
+	color: #ffffff;
+	padding: 0px 20px;
+	margin-right: 0px;
+	}
+
+#search-css-event-year .chosen-container-single .chosen-single div{
+	display: none;
+} 
+#search-css-event-year .chosen-container{
+	width: 15rem !important;
+}
+#search-css-event-year .chosen-container-single .chosen-single{
+	background: #185268;
+	color: #ffffff;
+	text-align: center;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 45px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 15px;
+    padding: 0px 30px;
+    font-size: 20px;
+}
+#search-css-event-year .chosen-container-active.chosen-with-drop .chosen-single{
+	background: #185268;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 40px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 20px 20px 0px 0px;
+}
+#search-css-event-year .chosen-container .chosen-results{
+	color: #000;
+}
+#search-css-event-year .chosen-container-single .chosen-single span{
+	font-size: 20px;
+	color: #ffffff;
+	padding: 0px 20px;
+	margin-right: 0px;
+	}
+
+#search-css-sector .chosen-container-single .chosen-single div{
+	display: none;
+}
+#search-css-sector .chosen-container{
+	width: 15rem !important;
+}
+#search-css-sector .chosen-container-single .chosen-single{
+	background: #185268;
+	color: #ffffff;
+	text-align: center;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 45px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 15px;
+    padding: 0px 30px;
+    font-size: 20px;
+}
+#search-css-sector .chosen-container-active.chosen-with-drop .chosen-single{
+	background: #185268;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 40px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 20px 20px 0px 0px;
+}
+#search-css-sector .chosen-container .chosen-results{
+	color: #000;
+}
+#search-css-sector .chosen-container-single .chosen-single span{
+	font-size: 20px;
+	color: #ffffff;
+	padding: 0px 20px;
+	margin-right: 0px;
+	}
+.btn-discover{
+	background: #185268;
+    color: #fff;
+    opacity: 1 !important;
+    border-radius: 20px;
+    font-size: 17px;
+	}
+	#search-css-sector .chosen-drop{
+	border: 3px solid #fff;
+	border-top: none;
+	background: #fff;
+	border-radius: 0px 0px 15px 15px;
+	}
+	#search-css-sector .chosen-search .chosen-search-input{
+		color: #fff;
+	}
+	#search-css-sector .chosen-drop li.active-result.result-selected{
+		color: #000;
+	}
+	#search-css-sector .chosen-drop li.active-result.result-selected.highlighted{
+	background: #3875d7;
+	color: #fff;
+	}
+	li.active-result.hightlighted{
+	background: #000 !important;
+	}
+/* trade event css code end */
+
+/* trade event css code start */
+#search-css-event-month .chosen-container-single .chosen-single div{
+	display: none;
+}
+#search-css-event-month .chosen-container{
+	width: 15rem !important;
+}
+#search-css-event-month .chosen-container-single .chosen-single{
+	background: #185268;
+	color: #ffffff;
+	text-align: center;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 45px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 15px;
+    padding: 0px 30px;
+    font-size: 20px;
+}
+#search-css-event-month .chosen-container .chosen-results{
+	color: #fff;
+}
+#search-css-event-month .chosen-container-active.chosen-with-drop .chosen-single{
+	background: #185268;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 40px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 20px 20px 0px 0px;
+}
+#search-css-event-month .chosen-container-single .chosen-single span{
+	font-size: 20px;
+	color: #ffffff;
+	margin-right: 0px;
+	}
+.btn-discover{
+	background: #185268;
+    color: #fff;
+    opacity: 1 !important;
+    border-radius: 20px;
+    font-size: 17px;
+	}
+	#search-css-event-month .chosen-drop{
+	border: 3px solid #185268;
+	border-top: none;
+	background: #185268;
+	border-radius: 0px 0px 15px 15px;
+	}
+	#search-css-event-month .chosen-search .chosen-search-input{
+		color: #fff;
+	}
+	#search-css-event-month .chosen-drop li.active-result.result-selected{
+		color: #000;
+	}
+	#search-css-event-month .chosen-drop li.active-result.result-selected.hightlighted{
+	background: #185268;
+	color: #fff;
+	}
+	li.active-result.hightlighted{
+	background: #000 !important;
+	}
+/* trade event css code end */
+
+.trade-sub-details-title{
+	    background: #d7dbac;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+.trade-sub-details-desc{
+	background: #61c2a2;
+    text-align: center;
+    height: 100%;
+}
+
+.trade-sub-details-desc p{
+	margin-bottom: 0px;
+	height: 100%;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* trade spotlight css start */
+.spotlight-content{
+	white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+#spotlightSlider .MS-content{
+	white-space: nowrap;
+    overflow: hidden;
+    margin: 0 5%;
+    display: flex;
+    }
+#spotlightSlider .MS-content .services-outer1 {
+	display: inline-flex;
+	width: 35%;
+	position: relative;
+	vertical-align: top;
+	overflow: hidden;
+	white-space: normal;
+	padding: 0 10px;
+	flex:none;
+	
+}
+#miniSlider .spotlight-content .services-outer1{
+	align-items: center;
+	justify-content: center;
+}
+
+/* trade spotlight css end */
+
+/* trade list search filter css code start */
+.filter-section .filter-title{
+    padding: .7rem;
+    border-radius: 20px;
+    margin: 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+.filter-section .filter-data{
+	background: #d7dbac;
+	padding: 0.7rem 2rem;
+	border-radius: 20px;
+	margin: 10px;
+	font-weight: 600;
+	width: auto;
+	font-size: 14px;
+}
+
+
+.filter-section {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 1rem 0;
+}
+
+
+/* trade list search filter css code end */
+
+#search-css-country .chosen-container-single .chosen-single div{
+	display: none;
+}
+#search-css-country .chosen-container{
+	width: 20rem !important;
+}
+#search-css-country .chosen-container-single .chosen-single{
+	background: #185268;
+	color: #ffffff;
+	text-align: center;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 45px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 15px;
+    padding: 0px 30px;
+    font-size: 20px;
+}
+#search-css-country .chosen-container-active.chosen-with-drop .chosen-single{
+	background: #185268;
+	box-shadow: none !important;
+    -webkit-box-shadow: none;
+    height: 40px;
+    line-height: 35px;
+    border: 3px solid #185268;
+    border-radius: 20px 20px 0px 0px;
+}
+#search-css-country .chosen-container .chosen-results{
+	color: #fff;
+}
+#search-css-country .chosen-container-single .chosen-single span{
+	font-size: 20px;
+	color: #ffffff;
+	padding: 0px 20px;
+	margin-right: 0px;
+	}
+#search-css-country .chosen-drop{
+	border: 3px solid #185268;
+	border-top: none;
+	background: #185268;
+	border-radius: 0px 0px 15px 15px;
+	}
+#search-css-country .chosen-search .chosen-search-input{
+		color: #fff;
+	}
+#search-css-country .chosen-drop li.active-result.result-selected{
+		color: #000;
+	}
+#search-css-country .chosen-drop li.active-result.result-selected.hightlighted{
+	background: #185268;
+	color: #fff;
+	}
+	/* e-commerce slider css code */
+	.MS-slider {
+    justify-content: space-around;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 5%;
+    display: flex;
+}
+	.MS-slider .services-outer{
+	width: 35%;
+    position: relative;
+    vertical-align: top;
+    overflow: hidden;
+    white-space: normal;
+    padding: 0 10px;
+    flex: none;
+	}
+	.MS-slider .services-inner {
+    background: #fff;
+    border: none;
+    border-radius: .75rem !important;
+}
+.MS-slider .services-inner .card-body {
+	text-align: center;
+	height: 10rem;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	}
+.MS-slider .card-footer{
+	background: none;
+	border: none;
+}
+.MS-slider .card-footer p{
+	color: #000;
+	margin-bottom: 0;
+}
+.MS-slider .services-outer:hover{
+	color: #000;
+	text-decoration: none;
+}
+	/* e-commerce slider css code */
+	
+.marketPlaceList{
+	display: flex;
+	align-items: center;
+    justify-content: space-around;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+.marketPlaceDesc{
+	font-size: 18px;
+	margin-bottom: 0;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.market-details-img{
+	background: #fff;
+	text-align: center;
+	padding: 3rem 0rem;
+}
+.market-place-details-subtitle{
+	color: #004aad;
+}
+.ecommrece-market-table-title{
+	font-size: 18px !important;
+    padding: 1.5rem !important;
+    background: #61c2a2;
+    text-align: center;
+}
+.ecommrece-market-table-desc{
+	background: #fff;
+	font-size: 18px !important;
+	padding: 1.5rem !imporatnt;
+}
+
+
+@media screen and (max-width: 768px) {
+
+#search-css-event-month .chosen-container{
+	width: 100% !important;
+}
+}
+/* e-commerce css code end */
+
+
+

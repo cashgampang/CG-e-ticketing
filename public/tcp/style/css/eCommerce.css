@@ -1,0 +1,159 @@
+.ecommerce-card{
+	background: transparent;
+	border: none;
+	transition: 0.5s;
+}
+.ecommerce-card .card-body{
+	height: 10rem;
+	background: #ddd;
+	border-radius: 1rem;
+}
+.ecommerce-card .card-footer{
+	height: 15rem;
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: 0.5s;
+}
+.ecommerce-card:hover .card-body{
+	border-radius: 1rem 1rem 0rem 0rem;
+}
+.ecommerce-card:hover .card-footer{
+	transform: translateY(0%);
+	opacity: 1;
+	background: #fff;
+	border-radius: 0rem 0rem 1rem 1rem;
+	border: 1px solid #ddd;
+}
+
+/* details page tabs custom css code start */
+.ecommerce-tabs ul.nav.nav-tabs{
+	background: #185268;
+    border-radius: 10px;
+}
+.ecommerce-tabs ul.nav.nav-tabs .nav-item:first-child{
+	border: none !important;
+}
+.ecommerce-tabs ul.nav.nav-tabs .nav-item:last-child{
+	border: none !important;
+}
+.ecommerce-tabs ul.nav.nav-tabs .nav-item{
+	border: 1px solid #9faeb4;
+}
+.ecommerce-tabs ul.nav.nav-tabs .nav-item .nav-link{
+	color: #fff;
+	text-align: center;
+}
+.ecommerce-tabs ul.nav.nav-tabs .nav-item .nav-link.active{
+	color: #185268;
+	border: 1px solid #185268; 
+}
+.ecommerce-btn-div{
+	position: relative;
+    top: 5.7rem;
+}
+.ecommerce-btn-div .Hide i{
+	color: #fff;
+}
+.ecommerce-btn-div .Show i{
+	color: #fff;
+}
+.ecommerce-btn-div .Hide{
+    font-size: 20px;
+    background: #185268;
+    padding: 0.5rem;
+    border-radius: 0px 10px 10px 0px;
+}
+.ecommerce-btn-div .Show{
+    font-size: 20px;
+    background: #185268;
+    padding: 0.5rem;
+    border-radius: 0px 10px 10px 0px;
+}
+/* details page tabs custom css code end */    
+/* social icon sticky css code start */
+.sticky_icon  {
+	z-index:1;
+	position:fixed;
+	top:30%;
+	right:0%;
+	width:220px;
+	display:flex;
+	flex-direction:column;
+	}  
+.sticky_icon a  {
+	display: flex;
+	align-items: center;
+	transform:translate(160px,0px);
+	border-radius:50px 0px 0px 50px;
+	text-align:left;
+	margin:2px;
+	text-decoration:none;
+	text-transform:uppercase;
+	padding:3px;
+	font-size:22px;
+	transition:all 0.8s;
+	}
+.sticky_icon a i {
+	background-color:#FFF;
+	height:40px;
+	width:40px;
+	color:#000;
+	text-align:center;
+	line-height:40px;
+	border-radius:50%;
+	margin-right:20px;
+	transition:all 0.5s;
+	}
+.sticky_icon a:hover  {
+	color:#FFF;
+	transform:translate(0px,0px);
+	}	
+.sticky_icon a:hover i  {
+	transform:rotate(360deg);
+	}
+.sticky_icon a span{
+	color: #fff;
+}
+.sticky_icon .phone i{
+	color: #185268;
+}	
+.sticky_icon .phone{
+	background: #185268;
+}
+.sticky_icon .instagram i{
+	color: #FD1D1D;
+}
+.sticky_icon .instagram{
+	background: #FD1D1D;
+}
+.sticky_icon .youtube i{
+	color: #fa0910;
+}
+.sticky_icon .youtube {
+	background: #fa0910;
+}
+.sticky_icon .facebook i{
+	color: #2C80D3;
+}
+.sticky_icon .facebook {
+	background: #2C80D3;
+}
+.sticky_icon .likedin i{
+	color: #007ebb;
+}
+.sticky_icon .likedin {
+	background: #007ebb;
+}
+.sticky_icon .telegram i{
+	color: #24a2df;
+}
+.sticky_icon .telegram {
+	background: #24a2df;
+}
+.google-visualization-tooltip{
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+	
+}
+/* social icon sticky css code end */

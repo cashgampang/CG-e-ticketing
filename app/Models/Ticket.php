@@ -17,6 +17,8 @@ class Ticket extends Model
         'definition_of_done',
         'status',
         'assigned_to',
+        'user_id',
+        'role',
         'assigned_at',
         'resolved_at'
     ];
@@ -25,11 +27,29 @@ class Ticket extends Model
         'assigned_at' => 'datetime',
         'resolved_at' => 'datetime'
     ];
+    
+    // Auto generate ticket code when creating
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($ticket) {
+            if (empty($ticket->ticket_code)) {
+                $ticket->ticket_code = static::generateTicketCode();
+            }
+        });
+    }
 
     // Relationship: Ticket belongs to team
     public function assignedTeam()
     {
         return $this->belongsTo(Team::class, 'assigned_to');
+    }
+
+    // Relasi ke User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     // Generate unique ticket code
@@ -49,18 +69,6 @@ class Ticket extends Model
         return $code;
     }
 
-    // Auto generate ticket code when creating
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($ticket) {
-            if (empty($ticket->ticket_code)) {
-                $ticket->ticket_code = self::generateTicketCode();
-            }
-        });
-    }
-
     // Scope untuk filter berdasarkan status
     public function scopeStatus($query, $status)
     {
@@ -71,5 +79,17 @@ class Ticket extends Model
     public function scopeActive($query)
     {
         return $query->whereIn('status', ['open', 'in_progress']);
+    }
+
+    // Scope untuk filter berdasarkan role
+    public function scopeByRole($query, $role)
+    {
+        return $query->where('role', $role);
+    }
+
+    // Scope untuk filter berdasarkan user (untuk user biasa hanya lihat tiket mereka sendiri)
+    public function scopeForUser($query, $userId)
+    {
+        return $query->where('user_id', $userId);
     }
 }

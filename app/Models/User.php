@@ -45,4 +45,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relasi ke Tickets
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    // Helper method untuk cek role
+    public function isIT()
+    {
+        return $this->role === 'IT';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
 }

@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->enum('role', ['IT', 'user'])->default('user')->after('email');
+        });
+        
         // Migration 1: Tabel teams
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
@@ -27,6 +31,8 @@ return new class extends Migration
             $table->text('definition_of_done'); // DoD
             $table->enum('status', ['open', 'in_progress', 'resolved', 'closed'])->default('open');
             $table->foreignId('assigned_to')->nullable()->constrained('teams')->onDelete('set null');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // User yang membuat ticket
+            $table->enum('role', ['IT', 'user'])->default('user'); // Role user
             $table->timestamp('assigned_at')->nullable();
             $table->timestamp('resolved_at')->nullable();
             $table->timestamps();
@@ -35,6 +41,8 @@ return new class extends Migration
             $table->index('ticket_code');
             $table->index('status');
             $table->index('assigned_to');
+            $table->index('user_id');
+            $table->index('role');
         });
     }
 

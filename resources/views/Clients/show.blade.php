@@ -39,7 +39,9 @@
 
                     <!-- Action Buttons -->
                     <div class="flex flex-wrap gap-2">
-                        @if (auth()->user()->role === 'IT' || $ticket->user_id === auth()->id())
+                        @if (
+                            (auth()->user()->role === 'IT' && $ticket->status === 'open') ||
+                                (auth()->user()->role === 'user' && $ticket->user_id === auth()->id() && in_array($ticket->status, ['open'])))
                             <a href="{{ route('tickets.edit', $ticket->id) }}"
                                 class="px-4 py-2 bg-neutral hover:bg-neutral-focus text-neutral-content rounded-lg font-medium transition-colors flex items-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,12 +65,12 @@
                             </button>
                         @endif
 
-                        @if (auth()->user()->role === 'IT' || ($ticket->user_id === auth()->id() && $ticket->status === 'open'))
+                        @if (auth()->user()->role === 'IT' || $ticket->user_id === auth()->id())
                             <form action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" class="inline"
                                 onsubmit="return confirm('Are you sure you want to delete this ticket?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"
+                                <button type="button" {{-- ⬅️ penting, supaya ga auto-submit form --}} onclick="deleteTicket({{ $ticket->id }})"
                                     class="px-4 py-2 bg-base-300 hover:bg-error/20 text-base-content hover:text-error rounded-lg font-medium transition-colors flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -138,7 +140,9 @@
                             <h2 class="text-lg sm:text-xl font-bold text-base-content">Problem Description</h2>
                         </div>
                         <div class="prose max-w-none">
-                            <p class="text-base-content/80 leading-relaxed">{{ $ticket->problem_detail }}</p>
+                            <p class="text-base-content/80 leading-relaxed">
+                                {!! nl2br(e($ticket->problem_detail)) !!}
+                            </p>
                         </div>
                     </div>
 
@@ -432,6 +436,31 @@
         function hideAssignModal() {
             document.getElementById('assignModal').classList.add('hidden');
             document.getElementById('assignModal').classList.remove('flex');
+        }
+
+        async function deleteTicket(id) {
+            if (!confirm('Are you sure you want to delete this ticket?')) return;
+
+            try {
+                const res = await fetch(`/api/tickets/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert(data.message);
+                    window.location.href = "{{ route('tickets.index') }}"; // balik ke list
+                } else {
+                    alert(data.message || 'Failed to delete ticket');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Server error');
+            }
         }
     </script>
 @endsection

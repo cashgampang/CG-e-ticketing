@@ -16,20 +16,46 @@ class TicketController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'IT') {
-            // IT bisa lihat semua tickets
-            $tickets = Ticket::with(['assignedTeam', 'user',])
-                ->orderBy('created_at', 'desc')
-                ->get();
-        } else {
-            // User biasa hanya bisa lihat ticket mereka sendiri
-            $tickets = Ticket::with(['assignedTeam', 'user'])
-                ->where('user_id', $user->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
+        $activeStatuses = ['open', 'in_progress'];
+
+        // Ambil semua tiket aktif untuk hitung antrian global
+        $activeTickets = Ticket::whereIn('status', $activeStatuses)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $allActiveIds = $activeTickets->pluck('id')->toArray();
+
+        // Query tiket yang akan ditampilkan di view
+        $ticketsQuery = Ticket::with(['assignedTeam', 'user'])
+            ->orderBy('created_at', 'desc');
+
+        if ($user->role !== 'IT') {
+            // User biasa hanya lihat tiket miliknya
+            $ticketsQuery->where('user_id', $user->id);
         }
 
-        return view('Clients.index', compact('tickets'));
+        $tickets = $ticketsQuery->get();
+
+        // Tambahkan posisi antrian
+        $tickets = $tickets->map(function ($ticket) use ($allActiveIds) {
+            if (!in_array($ticket->status, ['open', 'in_progress'])) {
+                $ticket->waiting_position = null;
+            } else {
+                $position = array_search($ticket->id, $allActiveIds);
+                $ticket->waiting_position = [
+                    'position' => $position !== false ? $position + 1 : null,
+                    'total' => count($allActiveIds)
+                ];
+            }
+
+            return $ticket;
+        });
+
+        return view('Clients.index', [
+            'tickets' => $tickets,
+            'teams' => $teams ?? [],
+            'allActiveIds' => $allActiveIds
+        ]);
     }
 
     //? GET /tickets/create - Form buat ticket baru
@@ -383,7 +409,8 @@ class TicketController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Ticket berhasil dihapus'
+                'message' => 'Ticket berhasil dihapus',
+                'ticket' => $ticket
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -391,5 +418,34 @@ class TicketController extends Controller
                 'message' => $e->getMessage()
             ], 422);
         }
+    }
+
+    private function calculateWaitingPosition($ticket)
+    {
+        // Only calculate for active statuses (exclude closed and resolved)
+        $activeStatuses = ['open', 'in_progress'];
+
+        if (!in_array($ticket->status, $activeStatuses)) {
+            return null; // No position for closed/resolved tickets
+        }
+
+        // Get all active tickets ordered by creation date
+        $activeTickets = Ticket::whereIn('status', $activeStatuses)
+            ->orderBy('created_at', 'asc')
+            ->pluck('id')
+            ->toArray();
+
+        // Find position of current ticket in the active queue
+        $position = array_search($ticket->id, $activeTickets);
+        $totalActive = count($activeTickets);
+
+        if ($position !== false) {
+            return [
+                'position' => $position + 1, // Convert to 1-based index
+                'total' => $totalActive
+            ];
+        }
+
+        return null;
     }
 }

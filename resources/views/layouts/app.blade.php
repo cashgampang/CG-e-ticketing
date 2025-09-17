@@ -108,7 +108,6 @@
                             </span>
                         </li>
                         <li><a href="#"><i class="fas fa-user mr-2"></i>Profile</a></li>
-                        <li><a href="#"><i class="fas fa-cog mr-2"></i>Settings</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}" class="w-full">
                                 @csrf

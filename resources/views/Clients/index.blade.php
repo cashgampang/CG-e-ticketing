@@ -20,6 +20,26 @@
             </div>
 
             <div class="flex flex-col sm:flex-row gap-3">
+                <!-- Added sorting dropdown for all users, not just IT -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-outline">
+                        <i class="fas fa-sort mr-2"></i>
+                        <span x-text="sortText"></span>
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a @click="setSorting('created_at', 'desc')"><i class="fas fa-clock mr-2"></i>Newest First</a>
+                        </li>
+                        <li><a @click="setSorting('created_at', 'asc')"><i class="fas fa-clock mr-2"></i>Oldest First</a>
+                        </li>
+                        <li><a @click="setSorting('status', 'asc')"><i class="fas fa-flag mr-2"></i>Status A-Z</a></li>
+                        <li><a @click="setSorting('requester_name', 'asc')"><i class="fas fa-user mr-2"></i>Name A-Z</a>
+                        </li>
+                        <li><a @click="setSorting('requester_name', 'desc')"><i class="fas fa-user mr-2"></i>Name Z-A</a>
+                        </li>
+                    </ul>
+                </div>
+
                 <!-- Filter Dropdown - Only show for IT -->
                 @if (auth()->user()->role === 'IT')
                     <div class="dropdown dropdown-end">
@@ -97,15 +117,18 @@
                                 <th class="min-w-32">Requester</th>
                                 <th class="min-w-36">Problem</th>
                                 <th class="w-32">Status</th>
-                                @if (auth()->user()->role === 'IT')
-                                    <th class="min-w-32">Assigned To</th>
+                                <!-- Added waiting list column for non-IT users -->
+                                @if (auth()->user()->role !== 'IT')
+                                    <th class="w-24">Queue</th>
                                 @endif
+                                <!-- Show assigned to column for all users, not just IT -->
+                                <th class="min-w-32">Assigned To</th>
                                 <th class="w-24">Created</th>
                                 <th class="min-w-48">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <template x-for="ticket in filteredTickets" :key="ticket.ticket_code ">
+                            <template x-for="ticket in sortedAndFilteredTickets" :key="ticket.ticket_code">
                                 <tr>
                                     <td>
                                         <div class="font-mono font-bold text-sm" x-text="ticket.ticket_code"></div>
@@ -130,16 +153,26 @@
                                             x-text="ticket.status.replace('_', ' ').toUpperCase()">
                                         </div>
                                     </td>
-                                    @if (auth()->user()->role === 'IT')
+                                    <!-- Added waiting list position display for non-IT users -->
+                                    @if (auth()->user()->role !== 'IT')
                                         <td>
-                                            <!-- Fixed assignment display and functionality -->
-                                            <div x-show="ticket.assigned_team" class="text-sm"
-                                                x-text="ticket.assigned_team?.name"></div>
-                                            <div x-show="!ticket.assigned_team">
-                                                <p><i><b>Unassigned</b></i></p>
+                                            <div x-show="ticket.status === 'open' || ticket.status === 'in_progress'">
+                                                <span class="text-sm font-mono"
+                                                    x-text="getWaitingPosition(ticket)"></span>
+                                            </div>
+                                            <div x-show="ticket.status === 'resolved' || ticket.status === 'closed'">
+                                                <span class="text-gray-500 italic text-xs">-</span>
                                             </div>
                                         </td>
                                     @endif
+                                    <!-- Show assigned to for all users with proper unassigned display -->
+                                    <td>
+                                        <div x-show="ticket.assigned_team" class="text-sm"
+                                            x-text="ticket.assigned_team?.name"></div>
+                                        <div x-show="!ticket.assigned_team">
+                                            <span class="text-gray-500 italic text-sm">Unassigned</span>
+                                        </div>
+                                    </td>
                                     <td>
                                         <span class="text-sm" x-text="formatDate(ticket.created_at)"></span>
                                     </td>
@@ -147,18 +180,21 @@
                                         <!-- Replaced gear dropdown with contextual action buttons -->
                                         <div class="flex flex-wrap gap-1">
                                             <!-- View button - available for all users -->
-                                            <a :href="'/tickets/' + ticket.id" class="btn btn-xs btn-ghost" title="View">
+                                            <a :href="'/tickets/' + ticket.id" class="btn btn-xs btn-ghost"
+                                                title="View">
                                                 <i class="fas fa-eye"></i>
                                             </a>
 
                                             <!-- Edit button - only for ticket owner or IT -->
                                             <template
-                                                x-if="ticket.user_id === {{ auth()->id() }} || '{{ auth()->user()->role }}' === 'IT'">
+                                                x-if="('{{ auth()->user()->role }}' === 'IT') || 
+          (ticket.user_id === {{ auth()->id() }} && ticket.status === 'open')">
                                                 <a :href="'/tickets/' + ticket.id + '/edit'" class="btn btn-xs btn-ghost"
                                                     title="Edit">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             </template>
+
 
                                             <!-- Contextual status buttons for IT -->
                                             @if (auth()->user()->role === 'IT')
@@ -201,7 +237,7 @@
                         </tbody>
                     </table>
 
-                    <div x-show="filteredTickets.length === 0 && !loading" class="text-center py-12">
+                    <div x-show="sortedAndFilteredTickets.length === 0 && !loading" class="text-center py-12">
                         <i class="fas fa-inbox text-6xl text-base-content/30 mb-4"></i>
                         <p class="text-xl text-base-content/70">No tickets found</p>
                         <a href="{{ route('tickets.create') }}" class="btn btn-primary mt-4">
@@ -240,10 +276,14 @@
             function ticketList() {
                 return {
                     tickets: @json($tickets ?? []),
+                    allActiveIds: @json($allActiveIds ?? []), // semua tiket aktif global
                     teams: @json($teams ?? []),
                     loading: false,
                     currentFilter: 'all',
                     filterText: 'All Tickets',
+                    sortBy: 'created_at',
+                    sortOrder: 'desc',
+                    sortText: 'Newest First',
                     userRole: '{{ auth()->user()->role }}',
                     showAssignModalFlag: false,
                     selectedTicketId: null,
@@ -263,6 +303,35 @@
                             return filtered;
                         }
                         return filtered.filter(ticket => ticket.status === this.currentFilter);
+                    },
+
+                    get sortedAndFilteredTickets() {
+                        let tickets = [...this.filteredTickets];
+
+                        tickets.sort((a, b) => {
+                            let aValue = a[this.sortBy];
+                            let bValue = b[this.sortBy];
+
+                            // Handle string comparison
+                            if (typeof aValue === 'string') {
+                                aValue = aValue.toLowerCase();
+                                bValue = bValue.toLowerCase();
+                            }
+
+                            // Handle date comparison
+                            if (this.sortBy === 'created_at') {
+                                aValue = new Date(aValue);
+                                bValue = new Date(bValue);
+                            }
+
+                            if (this.sortOrder === 'asc') {
+                                return aValue > bValue ? 1 : -1;
+                            } else {
+                                return aValue < bValue ? 1 : -1;
+                            }
+                        });
+
+                        return tickets;
                     },
 
                     get stats() {
@@ -289,9 +358,20 @@
                             filter.charAt(0).toUpperCase() + filter.slice(1);
                     },
 
-                    showAssignModal(ticketId) {
-                        this.selectedTicketId = ticketId;
-                        this.showAssignModalFlag = true;
+                    setSorting(sortBy, sortOrder) {
+                        this.sortBy = sortBy;
+                        this.sortOrder = sortOrder;
+
+                        // Update sort text for display
+                        const sortTexts = {
+                            'created_at_desc': 'Newest First',
+                            'created_at_asc': 'Oldest First',
+                            'status_asc': 'Status A-Z',
+                            'requester_name_asc': 'Name A-Z',
+                            'requester_name_desc': 'Name Z-A'
+                        };
+
+                        this.sortText = sortTexts[`${sortBy}_${sortOrder}`] || 'Custom Sort';
                     },
 
                     async assignTeam(ticketId, teamId, teamName) {
@@ -381,9 +461,13 @@
 
                             const result = await response.json();
 
-                            if (result.success) {
-                                this.tickets = this.tickets.filter(t => t.id !== id);
+                            if (result.success === true) {
                                 this.showAlert('success', 'Ticket deleted successfully');
+
+                                // ✅ Redirect ke halaman utama setelah delete
+                                setTimeout(() => {
+                                    window.location.href = '/tickets'; // Ganti '/' sesuai route yang kamu inginkan
+                                }, 1000); // Kasih delay sedikit biar alert sempat muncul
                             } else {
                                 throw new Error(result.message || 'Failed to delete ticket');
                             }
@@ -407,6 +491,12 @@
                             month: 'short',
                             day: 'numeric'
                         });
+                    },
+
+                    getWaitingPosition(currentTicket) {
+                        // Only count active tickets (open and in_progress)
+                        const idx = this.allActiveIds.findIndex(id => id == currentTicket.id);
+                        return `${idx >= 0 ? idx + 1 : '-'}/${this.allActiveIds.length}`;
                     }
                 }
             }

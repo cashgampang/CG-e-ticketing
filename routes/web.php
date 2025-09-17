@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/tickets', [TicketController::class, 'apiIndex'])->name('tickets.index');
         Route::get('/teams', [TeamController::class, 'apiIndex'])->name('teams.index');
         Route::post('/tickets/{id}/assign', [TicketController::class, 'apiAssign'])->name('tickets.assign');
+        Route::delete('/tickets/{id}', [TicketController::class, 'apiDestroy'])->name('tickets.destroy');
     });
+
 });
 
 require __DIR__ . '/auth.php';
